@@ -1,151 +1,154 @@
 <?php
 /**
- * Store Pro Theme.
+ * Genesis Sample.
  *
- * @package      Store Pro
- * @link         https://seothemes.net/store-pro
- * @author       Seo Themes
- * @copyright    Copyright © 2017 Seo Themes
- * @license      GPL-2.0+
+ * This file adds functions to the Genesis Sample Theme.
+ *
+ * @package Genesis Sample
+ * @author  StudioPress
+ * @license GPL-2.0+
+ * @link    http://www.studiopress.com/
  */
 
-// Child theme (do not remove).
+// Start the engine.
 include_once( get_template_directory() . '/lib/init.php' );
 
+// Setup Theme.
+include_once( get_stylesheet_directory() . '/lib/theme-defaults.php' );
+
 // Set Localization (do not remove).
-load_child_theme_textdomain( 'store-pro', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'store-pro' ) );
+add_action( 'after_setup_theme', 'genesis_sample_localization_setup' );
+function genesis_sample_localization_setup(){
+	load_child_theme_textdomain( 'genesis-sample', get_stylesheet_directory() . '/languages' );
+}
 
-// Theme constants.
-define( 'CHILD_THEME_NAME', 'mujo-pro' );
-define( 'CHILD_THEME_URL', 'http://mujo.ro/' );
-define( 'CHILD_THEME_VERSION', '0.1.0' );
+// Add the helper functions.
+include_once( get_stylesheet_directory() . '/lib/helper-functions.php' );
 
-// Remove unused functionality.
-unregister_sidebar( 'sidebar' );
-unregister_sidebar( 'sidebar-alt' );
-unregister_sidebar( 'header-right' );
-genesis_unregister_layout( 'content-sidebar-sidebar' );
-genesis_unregister_layout( 'sidebar-content-sidebar' );
-genesis_unregister_layout( 'sidebar-sidebar-content' );
+// Add Image upload and Color select to WordPress Theme Customizer.
+require_once( get_stylesheet_directory() . '/lib/customize.php' );
 
-// Enable support for structural wraps.
-add_theme_support( 'genesis-structural-wraps', array(
-	'header',
-	'menu-primary',
-	'menu-secondary',
-	'site-inner',
-	'footer-widgets',
-	'footer',
-) );
+// Include Customizer CSS.
+include_once( get_stylesheet_directory() . '/lib/output.php' );
 
-// Enable Accessibility support.
-add_theme_support( 'genesis-accessibility', array(
-	'404-page',
-	'drop-down-menu',
-	'headings',
-	'rems',
-	'search-form',
-	'skip-links',
-) );
+// Add WooCommerce support.
+include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-setup.php' );
 
-// Rename primary and secondary navigation menus.
-add_theme_support( 'genesis-menus' , array(
-	'primary' => __( 'Primary Menu', 'store-pro' ),
-	'secondary' => __( 'Secondary Menu', 'store-pro' ),
-) );
+// Add the required WooCommerce styles and Customizer CSS.
+include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-output.php' );
 
-// Enable HTML5 markup structure.
-add_theme_support( 'html5', array(
-	'caption',
-	'comment-form',
-	'comment-list',
-	'gallery',
-	'search-form',
-) );
+// Add the Genesis Connect WooCommerce notice.
+include_once( get_stylesheet_directory() . '/lib/woocommerce/woocommerce-notice.php' );
 
-// Add support for post formats.
-add_theme_support( 'post-formats', array(
-	'aside',
-	'audio',
-	'chat',
-	'gallery',
-	'image',
-	'link',
-	'quote',
-	'status',
-	'video',
-) );
+// Child theme (do not remove).
+define( 'CHILD_THEME_NAME', 'Genesis Sample' );
+define( 'CHILD_THEME_URL', 'http://www.studiopress.com/' );
+define( 'CHILD_THEME_VERSION', '2.3.0' );
 
-// Enable support for post thumbnails.
-add_theme_support( 'post-thumbnails' );
+// Enqueue Scripts and Styles.
+add_action( 'wp_enqueue_scripts', 'genesis_sample_enqueue_scripts_styles' );
+function genesis_sample_enqueue_scripts_styles() {
 
-// Enable automatic output of WordPress title tags.
-add_theme_support( 'title-tag' );
+	wp_enqueue_style( 'genesis-sample-fonts', '//fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700', array(), CHILD_THEME_VERSION );
+	wp_enqueue_style( 'dashicons' );
 
-// Enable selective refresh and Customizer edit icons.
-add_theme_support( 'customize-selective-refresh-widgets' );
-
-// Enable theme support for custom background image.
-add_theme_support( 'custom-background' );
-
-// Enable logo option in Customizer > Site Identity.
-add_theme_support( 'custom-logo', array(
-	'height'      => 60,
-	'width'       => 200,
-	'flex-height' => true,
-	'flex-width'  => true,
-	'header-text' => array( '.site-title', '.site-description' ),
-) );
-
-// Enable support for custom header image or video.
-add_theme_support( 'custom-header', array(
-	'header-selector' 	=> '.front-page-1',
-	'default_image'    	=> get_stylesheet_directory_uri() . '/assets/images/hero.jpg',
-	'header-text'     	=> false,
-	'width'           	=> 1920,
-	'height'          	=> 1080,
-	'flex-height'     	=> true,
-	'flex-width'		=> true,
-	'video'				=> true,
-) );
-
-// Register default header (just in case).
-register_default_headers( array(
-	'child' => array(
-		'url'           => '%2$s/assets/images/hero.jpg',
-		'thumbnail_url' => '%2$s/assets/images/hero.jpg',
-		'description'   => __( 'Hero Image', 'store-pro' ),
-	),
-) );
-
-/**
- * Load custom scripts and styles.
- */
-function sp_enqueue_scripts_styles() {
-
-	// Google fonts.
-//	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700', array(), CHILD_THEME_VERSION );
-
-	// Line awesome.
-	wp_enqueue_style( 'line-awesome', 'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css' );
-
-	// Theme scripts.
-	wp_enqueue_script( 'store-pro', get_stylesheet_directory_uri() . '/assets/scripts/min/store-pro.min.js', array( 'jquery' ), CHILD_THEME_VERSION, true );
+	$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+	wp_enqueue_script( 'genesis-sample-responsive-menu', get_stylesheet_directory_uri() . "/js/responsive-menus{$suffix}.js", array( 'jquery' ), CHILD_THEME_VERSION, true );
+	wp_localize_script(
+		'genesis-sample-responsive-menu',
+		'genesis_responsive_menu',
+		genesis_sample_responsive_menu_settings()
+	);
 
 }
-add_action( 'wp_enqueue_scripts', 'sp_enqueue_scripts_styles' );
 
-// Theme includes.
-include_once( get_stylesheet_directory() . '/includes/theme-defaults.php' );
-include_once( get_stylesheet_directory() . '/includes/helper-functions.php' );
-include_once( get_stylesheet_directory() . '/includes/class-optimizations.php' );
-include_once( get_stylesheet_directory() . '/includes/class-clean-gallery.php' );
-include_once( get_stylesheet_directory() . '/includes/class-plugin-activation.php' );
-include_once( get_stylesheet_directory() . '/includes/widget-areas.php' );
-include_once( get_stylesheet_directory() . '/includes/woocommerce.php' );
-include_once( get_stylesheet_directory() . '/includes/customizer-settings.php' );
-include_once( get_stylesheet_directory() . '/includes/customizer-output.php' );
+// Define our responsive menu settings.
+function genesis_sample_responsive_menu_settings() {
 
+	$settings = array(
+		'mainMenu'          => __( 'Menu', 'genesis-sample' ),
+		'menuIconClass'     => 'dashicons-before dashicons-menu',
+		'subMenu'           => __( 'Submenu', 'genesis-sample' ),
+		'subMenuIconsClass' => 'dashicons-before dashicons-arrow-down-alt2',
+		'menuClasses'       => array(
+			'combine' => array(
+				'.nav-primary',
+				'.nav-header',
+			),
+			'others'  => array(),
+		),
+	);
+
+	return $settings;
+
+}
+
+// Add HTML5 markup structure.
+add_theme_support( 'html5', array( 'caption', 'comment-form', 'comment-list', 'gallery', 'search-form' ) );
+
+// Add Accessibility support.
+add_theme_support( 'genesis-accessibility', array( '404-page', 'drop-down-menu', 'headings', 'rems', 'search-form', 'skip-links' ) );
+
+// Add viewport meta tag for mobile browsers.
+add_theme_support( 'genesis-responsive-viewport' );
+
+// Add support for custom header.
+add_theme_support( 'custom-header', array(
+	'width'           => 600,
+	'height'          => 160,
+	'header-selector' => '.site-title a',
+	'header-text'     => false,
+	'flex-height'     => true,
+) );
+
+// Add support for custom background.
+add_theme_support( 'custom-background' );
+
+// Add support for after entry widget.
+add_theme_support( 'genesis-after-entry-widget-area' );
+
+// Add support for 3-column footer widgets.
+add_theme_support( 'genesis-footer-widgets', 3 );
+
+// Add Image Sizes.
+add_image_size( 'featured-image', 720, 400, TRUE );
+
+// Rename primary and secondary navigation menus.
+add_theme_support( 'genesis-menus', array( 'primary' => __( 'After Header Menu', 'genesis-sample' ), 'secondary' => __( 'Footer Menu', 'genesis-sample' ) ) );
+
+// Reposition the secondary navigation menu.
+remove_action( 'genesis_after_header', 'genesis_do_subnav' );
+add_action( 'genesis_footer', 'genesis_do_subnav', 5 );
+
+// Reduce the secondary navigation menu to one level depth.
+add_filter( 'wp_nav_menu_args', 'genesis_sample_secondary_menu_args' );
+function genesis_sample_secondary_menu_args( $args ) {
+
+	if ( 'secondary' != $args['theme_location'] ) {
+		return $args;
+	}
+
+	$args['depth'] = 1;
+
+	return $args;
+
+}
+
+// Modify size of the Gravatar in the author box.
+add_filter( 'genesis_author_box_gravatar_size', 'genesis_sample_author_box_gravatar' );
+function genesis_sample_author_box_gravatar( $size ) {
+	return 90;
+}
+
+// Modify size of the Gravatar in the entry comments.
+add_filter( 'genesis_comment_list_args', 'genesis_sample_comments_gravatar' );
+function genesis_sample_comments_gravatar( $args ) {
+
+	$args['avatar_size'] = 60;
+
+	return $args;
+
+}
 
 // =================================================================
 // = Pinterest-like Masonry layout for all Archives =
@@ -175,7 +178,7 @@ function sk_masonry_script() {
 		return;
 	}
 
-	wp_enqueue_script( 'masonry-init', get_stylesheet_directory_uri() . '/assets/scripts/masonry-init.js', array( 'jquery-masonry' ), CHILD_THEME_VERSION, true );
+	wp_enqueue_script( 'masonry-init', get_stylesheet_directory_uri() . '/js/masonry-init.js', array( 'jquery-masonry' ), CHILD_THEME_VERSION, true );
 }
 
 
@@ -298,3 +301,6 @@ add_filter( 'excerpt_length', 'sk_excerpt_length' );
 function sk_excerpt_length( $length ) {
 	return 20; // pull first 20 words.
 }
+
+// Remove Footer Widgets.
+remove_action( 'genesis_before_footer', 'genesis_footer_widget_areas' );

@@ -1308,7 +1308,7 @@ p.entry-meta {
 
 .entry-categories,
 .entry-tags {
-	display: block;
+	display: inline-block;
 }
 
 .entry-comments-link::before {
@@ -1484,7 +1484,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .entry {
-	padding: 10px;
+	padding: 0;
 	border-radius: 0;
 	overflow: hidden;
 }
@@ -1507,7 +1507,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .title-content {
-	padding: 20px;
+	padding: 20px 0;
 }
 
 .masonry-page .content .entry-title {
@@ -1534,7 +1534,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .entry-footer {
-	padding: 10px 20px;
+	padding: 10px 0;
 	border-top: 1px dashed #ddd;
 }
 

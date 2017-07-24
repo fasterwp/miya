@@ -16,8 +16,8 @@ include_once( get_template_directory() . '/lib/init.php' );
 load_child_theme_textdomain( 'store-pro', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'store-pro' ) );
 
 // Theme constants.
-define( 'CHILD_THEME_NAME', 'store-pro' );
-define( 'CHILD_THEME_URL', 'http://www.seothemes.net/store-pro' );
+define( 'CHILD_THEME_NAME', 'mujo-pro' );
+define( 'CHILD_THEME_URL', 'http://mujo.ro/' );
 define( 'CHILD_THEME_VERSION', '0.1.0' );
 
 // Remove unused functionality.

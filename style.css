@@ -1,9 +1,9 @@
 /*
-	Theme Name: Miya
-	Theme URI: https://fasterwp.com/
+	Theme Name: Genesis Sample
+	Theme URI: http://www.studiopress.com/
 	Description: This is the sample theme created for the Genesis Framework.
-	Author: Andrei Chira & StudioPress & Sridhar Katakam
-	Author URI: https://fasterwp.com/
+	Author: StudioPress
+	Author URI: http://www.studiopress.com/
 
 	Version: 2.3.0
 
@@ -157,7 +157,7 @@ body > div {
 }
 
 body {
-	background-color: #fff;
+	background-color: #eee;
 	color: #333;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 20px;
@@ -260,7 +260,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: Georgia, serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 600;
 	line-height: 1.2;
 	margin: 0 0 10px;
@@ -773,7 +773,7 @@ th:first-child {
 .entry-content .search-form,
 .site-header .search-form {
 	margin-bottom: 40px;
-	width: 80%;
+	width: 50%;
 }
 
 .site-header .search-form {
@@ -1054,7 +1054,7 @@ img.alignright,
 .title-area {
 	float: left;
 	padding: 10px 0;
-	width: 25%;
+	width: 300px;
 }
 
 .header-image .title-area {
@@ -1114,7 +1114,7 @@ img.alignright,
 .site-header .widget-area {
 	float: right;
 	text-align: right;
-	width: 25%;
+	width: 800px;
 }
 
 
@@ -1234,10 +1234,8 @@ img.alignright,
 --------------------------------------------- */
 
 .nav-primary {
-	width: 50%;
-    text-align: center;
-	float: left;
-	text-transform: uppercase;
+	background-color: #fff;
+	border-top: 1px solid #eee;
 }
 
 /* ## Footer Navigation
@@ -1308,7 +1306,7 @@ p.entry-meta {
 
 .entry-categories,
 .entry-tags {
-	display: inline-block;
+	display: block;
 }
 
 .entry-comments-link::before {
@@ -1484,7 +1482,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .entry {
-	padding: 0;
+	padding: 10px;
 	border-radius: 0;
 	overflow: hidden;
 }
@@ -1495,7 +1493,7 @@ p.entry-meta {
 
 .grid-sizer,
 .masonry-page .content .entry {
-	width: 32%; /*23.5%; /* 4 columns. { 100 - [(number of columns - 1) x gutter width] } / number of columns */
+	width: 23.5%; /* 4 columns. { 100 - [(number of columns - 1) x gutter width] } / number of columns */
 	margin-bottom: 2%;
 }
 
@@ -1507,7 +1505,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .title-content {
-	padding: 20px 0;
+	padding: 20px;
 }
 
 .masonry-page .content .entry-title {
@@ -1534,7 +1532,7 @@ p.entry-meta {
 }
 
 .masonry-page .content .entry-footer {
-	padding: 10px 0;
+	padding: 10px 20px;
 	border-top: 1px dashed #ddd;
 }
 
@@ -1575,7 +1573,7 @@ p.entry-meta {
 
 	.grid-sizer,
 	.masonry-page .content .entry {
-		width: 49%; /* 3 columns. (100-4)/3 = 32. Where 4 = (Number of columns - 1) x gutter width */
+		width: 32%; /* 3 columns. (100-4)/3 = 32. Where 4 = (Number of columns - 1) x gutter width */
 	}
 
 }
@@ -1619,7 +1617,8 @@ p.entry-meta {
 		width: 920px;
 	}
 
-	.content {
+	.content,
+	.site-header .widget-area {
 		width: 800px;
 	}
 
